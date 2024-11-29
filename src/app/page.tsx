@@ -1,67 +1,35 @@
 "use client"
 
-import { useState } from 'react';
+import Link from "next/link";
 
-function DiceRoller() {
-  const [diceValue, setDiceValue] = useState<number>(1);
-  const [rolling, setRolling] = useState<boolean>(false);
-  const [history, setHistory] = useState<{ number: number; value: number }[]>([]);
-
-  const rollDice = () => {
-    setRolling(true);
-
-    // Animation und Verzögerung simulieren
-    setTimeout(() => {
-      const newValue = Math.floor(Math.random() * 6) + 1;
-
-      // Neuer Wurf wird mit passender Nummer gespeichert
-      setHistory((prevHistory) => [
-        { number: prevHistory.length + 1, value: newValue },
-        ...prevHistory,
-      ]);
-
-      setDiceValue(newValue);
-      setRolling(false);
-    }, 1000);
-  };
-
+const HomePage = () => {
   return (
-    <div className="h-screen flex flex-col items-center">
-      <h1 className="text-2xl font-bold">Würfel-Simulator mit Animation</h1>
-
-      <div
-        className={`inline-block w-24 h-24 border-2 rounded-md text-4xl font-bold my-5 ${
-          rolling ? 'bg-gray-200 animate-spin' : 'bg-white'
-        } flex items-center justify-center`}
-      >
-        {rolling ? '?' : diceValue}
+    <div className="h-screen flex flex-col justify-center items-center bg-cover bg-center text-white" style={{ backgroundImage: "url('/background.jpg')" }}>
+      <h1 className="text-3xl md:text-5xl font-bold text-shadow-lg">
+        Willkommen auf der Startseite
+      </h1>
+      <div className="flex gap-5 mt-8">
+        <Link
+          href="/wuerfel"
+          className="px-6 py-3 text-lg font-medium bg-black bg-opacity-70 border-2 border-white rounded-lg shadow-md transition-transform transform hover:scale-110 hover:bg-white hover:text-black"
+        >
+          Würfel
+        </Link>
+        <Link
+          href="/matrix"
+          className="px-6 py-3 text-lg font-medium bg-black bg-opacity-70 border-2 border-white rounded-lg shadow-md transition-transform transform hover:scale-110 hover:bg-white hover:text-black"
+        >
+          Matrix
+        </Link>
+        <Link
+          href="/test"
+          className="px-6 py-3 text-lg font-medium bg-black bg-opacity-70 border-2 border-white rounded-lg shadow-md transition-transform transform hover:scale-110 hover:bg-white hover:text-black"
+        >
+          Test
+        </Link>
       </div>
-
-      <button
-        onClick={rollDice}
-        disabled={rolling}
-        className={`px-6 py-2 text-lg font-medium rounded-md ${
-          rolling
-            ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
-            : 'bg-blue-500 text-white hover:bg-blue-600'
-        }`}
-      >
-        {rolling ? 'Würfeln...' : 'Würfeln'}
-      </button>
-
-      <h2 className="text-xl font-semibold mt-8">Wurf-Historie</h2>
-      <ul className="list-none mt-4">
-        {history.map((entry) => (
-          <li
-            key={entry.number}
-            className="text-lg font-medium mb-2"
-          >
-            Wurf {entry.number}: {entry.value}
-          </li>
-        ))}
-      </ul>
     </div>
   );
-}
+};
 
-export default DiceRoller;
+export default HomePage;
