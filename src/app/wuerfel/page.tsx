@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react';
-
+import Link from 'next/link';
 function DiceRoller() {
   const [diceValue, setDiceValue] = useState<number>(1);
   const [rolling, setRolling] = useState<boolean>(false);
@@ -60,6 +60,10 @@ function DiceRoller() {
           </li>
         ))}
       </ul>
+            {/* Button unten rechts */}
+            <Link href="/" className="fixed bottom-4 right-4 w-12 h-12 bg-blue-500 text-white flex items-center justify-center rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">
+  ⇦
+</Link>
     </div>
   );
 }
